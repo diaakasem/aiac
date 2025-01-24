@@ -6,6 +6,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/gofireflyio/aiac/v5/libaiac/bedrock"
+	"github.com/gofireflyio/aiac/v5/libaiac/deepseek"
 	"github.com/gofireflyio/aiac/v5/libaiac/ollama"
 	"github.com/gofireflyio/aiac/v5/libaiac/openai"
 	"github.com/gofireflyio/aiac/v5/libaiac/types"
@@ -140,6 +141,16 @@ func (aiac *Aiac) loadBackend(ctx context.Context, name string) (
 			URL:          backendConf.URL,
 			ExtraHeaders: backendConf.ExtraHeaders,
 		})
+	case BackendDeepseek:
+		backend, err = deepseek.New(&openai.Options{
+			ApiKey:       backendConf.APIKey,
+			URL:          backendConf.URL,
+			APIVersion:   backendConf.APIVersion,
+			ExtraHeaders: backendConf.ExtraHeaders,
+		})
+		if err != nil {
+			return nil, defaultModel, err
+		}
 	default:
 		// default to openai
 		backend, err = openai.New(&openai.Options{

@@ -41,7 +41,7 @@ Generator.
 
 `aiac` is a library and command line tool to generate IaC (Infrastructure as Code)
 templates, configurations, utilities, queries and more via [LLM](https://en.wikipedia.org/wiki/Large_language_model) providers such
-as [OpenAI](https://openai.com/), [Amazon Bedrock](https://aws.amazon.com/bedrock/) and [Ollama](https://ollama.ai/).
+as [OpenAI](https://openai.com/), [Amazon Bedrock](https://aws.amazon.com/bedrock/), [Ollama](https://ollama.ai/) and [Deepseek](https://deepseek.ai/).
 
 The CLI allows you to ask a model to generate templates for different scenarios
 (e.g. "get terraform for AWS EC2"). It composes an appropriate request to the
@@ -179,6 +179,12 @@ default_model = "amazon.titan-text-express-v1"
 [backends.localhost]
 type = "ollama"
 url = "http://localhost:11434/api"     # This is the default
+
+[backends.deepseek]
+type = "deepseek"
+api_key = "API KEY"
+# Or use environment variable
+# api_key = "$DEEPSEEK_API_KEY"
 ```
 
 Notes:

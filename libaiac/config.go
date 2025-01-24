@@ -20,6 +20,9 @@ const (
 
 	// BackendOllama represents the Ollama LLM provider.
 	BackendOllama BackendType = "ollama"
+
+	// BackendDeepseek represents the Deepseek LLM provider.
+	BackendDeepseek BackendType = "deepseek"
 )
 
 // Config holds the configuration for aiac.

@@ -83,6 +83,11 @@ func (conv *Conversation) Send(ctx context.Context, prompt string) (
 
 	err = req.RunContext(ctx)
 	if err != nil {
+		if ctx.Err() == context.DeadlineExceeded {
+			return res, fmt.Errorf("request timed out after %v: %w", DefaultTimeout, err)
+		} else if ctx.Err() == context.Canceled {
+			return res, fmt.Errorf("request was canceled: %w", err)
+		}
 		return res, fmt.Errorf("failed sending prompt: %w", err)
 	}
 

@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"time"
 
 	"github.com/gofireflyio/aiac/v5/libaiac/types"
 	"github.com/ido50/requests"
@@ -13,6 +14,9 @@ import (
 
 // OpenAIBackend is the default URI endpoint for the OpenAI API
 const OpenAIBackend = "https://api.openai.com/v1"
+
+// DefaultTimeout is the default timeout for requests to the OpenAI API
+const DefaultTimeout = 60 * time.Second
 
 // OpenAI is a structure used to continuously generate IaC code via OpenAPI
 type OpenAI struct {
@@ -44,6 +48,10 @@ type Options struct {
 	// ExtraHeaders are extra HTTP headers to send with every request to the
 	// provider.
 	ExtraHeaders map[string]string
+
+	// HTTPClient is an optional pre-configured HTTP client. If not provided,
+	// a default client will be created.
+	HTTPClient *requests.HTTPClient
 }
 
 // New creates a new instance of the OpenAI struct, with the provided input
